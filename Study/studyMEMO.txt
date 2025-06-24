@@ -1,0 +1,62 @@
+useState
+useMemo
+useEffect
+useRef
+useCallback
+
+
+
+Q
+node.js로 계산기를 구현하려는데 gitHub에 올려서 작업을 할거야. 
+내가 지금 하려는건 각 계산기의 필요한 기능들을 각자 다른 브랜치에서 구현하고 
+나중에 merge를 해서 관리하려하는데 
+useRef, useState, useMemo, useEffect로 
+브랜치를 각자 만들어서 하려하는데 어떻게 해야할까
+
+A
+너무 좋은 프로젝트 방향이에요! 깔끔하게 브랜치를 나눠서 작업하고, 기능별로 관리하는 방식은 협업이나 기능 테스트에 아주 유용하죠. 
+다만
+useRef, useState, useMemo, useEffect는 React에서 사용하는 Hook들인데, 
+지금 말씀하신 건 Node.js로 계산기를 만든다고 하셔서 살짝 혼동이 있는 것 같아요.
+혹시 React 기반의 웹 계산기를 만들고 있고, 그걸 GitHub에 올려서 관리하려는 걸까요? 
+
+
+🔀 브랜치 구성 아이디어 (React 기반 계산기일 경우)
+main: 배포 가능한 완성된 버전
+
+feature/useState-calc: useState로 상태 관리 구현
+
+feature/useRef-focus: 버튼 또는 입력창에 useRef로 포커싱 기능 구현
+
+feature/useMemo-optimize: 연산 결과를 useMemo로 캐싱하거나 성능 개선
+
+feature/useEffect-log: useEffect로 연산 기록 저장 또는 초기화 효과 구현
+
+각 브랜치에서는 관련 훅에 집중해서 기능을 개발하면 돼요. 
+
+예를 들어:
+
+bash
+git checkout -b feature/useState-calc
+작업한 후엔 PR(Pull Request)로 main 브랜치에 병합하면서 리뷰하거나 테스트해볼 수 있고요.
+
+👷 작업 예시: useMemo 브랜치에서 연산 최적화
+js
+const result = useMemo(() => {
+  console.log('복잡한 계산 실행!');
+  return calcResult(input);
+}, [input]);
+이렇게 무거운 연산이 input 바뀔 때만 실행되도록 구성해볼 수 있죠!
+
+🌳 브랜치 병합 흐름 예시
+bash
+git checkout main
+git pull
+git checkout feature/useRef-focus
+git merge main
+# 충돌 해결 후
+git push origin feature/useRef-focus
+# GitHub에서 Pull Request 생성
+브랜치 이름은 feature/... 또는 hook/...처럼 통일성 있게 지으면 협업할 때도 보기 좋아요 😊 혹시 계산기를 Node.js로 CLI에서 구현하려던 거였다면 React가 아닌 다른 계획일 수도 있어서 확인만 한번 해볼게요!
+
+어떤 방식으로든 제가 함께 구조를 짜드릴 수 있어요. 어떤 쪽이 맞는 걸까요—React? Node.js CLI? Web? 🛠️✨
